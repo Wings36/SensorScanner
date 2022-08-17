@@ -1,4 +1,4 @@
-package com.nexusnetwork.sensorscanner;
+package com.nexusnetwork.sensorscanner.HomeFragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -24,6 +24,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nexusnetwork.sensorscanner.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_drawer_layout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
@@ -14,11 +14,7 @@
 
     <!-- this the navigation view which draws and shows the navigation drawer -->
     <!-- include the menu created in the menu folder -->
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/navigation_menu" />
+
 
     <RelativeLayout
         android:id="@+id/fragment"
@@ -27,5 +23,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintTop_toTopOf="@+id/appBarLayout"
         tools:layout_editor_absoluteX="0dp" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navview"
+        app:menu="@menu/navigation_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

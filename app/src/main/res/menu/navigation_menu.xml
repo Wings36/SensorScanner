@@ -5,14 +5,17 @@
 
     <item
         android:id="@+id/device_list"
+        android:icon="@drawable/baseline_bluetooth_24"
         android:title="Devices" />
 
     <item
-        android:id="@+id/nav_settings"
+        android:id="@+id/terminal"
+        android:icon="@drawable/baseline_terminal_24"
         android:title="Terminal" />
 
     <item
-        android:id="@+id/nav_logout"
+        android:id="@+id/data"
+        android:icon="@drawable/baseline_sensors_24"
         android:title="Data" />
 
 </menu>
