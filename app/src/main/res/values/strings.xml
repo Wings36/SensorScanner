@@ -2,4 +2,6 @@
     <string name="app_name">Sensor Scanner</string>
     <string name="devices">Bluetooth Devices</string>
     <string name="bluetooth_not_supported">This device does not support Bluetooth</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

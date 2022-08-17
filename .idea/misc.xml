@@ -5,10 +5,11 @@
       <map>
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/drawable-xhdpi/ic_launcher_background.xml" value="0.1935" />
-        <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/device_list.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/device_list_header.xml" value="0.358695652173913" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/deviceitem.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/navigation_menu.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/layout/sensorfragment.xml" value="0.358695652173913" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1935" />
         <entry key="..\:/Users/peter/AndroidStudioProjects/SensorScanner5/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1935" />
