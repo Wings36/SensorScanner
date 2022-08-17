@@ -53,9 +53,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
         setRetainInstance(true);
-        deviceAddress = getArguments().getString("device");
+        //deviceAddress = getArguments().getString("device");
+    }
+
+    public void setAddress(String address) {
+        deviceAddress = address;
     }
 
     @Override
@@ -147,11 +152,12 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     /*
      * Serial + UI
      */
-    private void connect() {
+    public void connect() {
         try {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
-            status("connecting...");
+            //status("connecting...");
+
             connected = Connected.Pending;
             SerialSocket socket = new SerialSocket(getActivity().getApplicationContext(), device);
             service.connect(socket);
@@ -213,9 +219,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     }
 
     private void status(String str) {
-        SpannableStringBuilder spn = new SpannableStringBuilder(str + '\n');
-        spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorStatusText)), 0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        receiveText.append(spn);
+        Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
     }
 
     /*

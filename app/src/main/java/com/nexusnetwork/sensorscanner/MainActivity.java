@@ -7,13 +7,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.nexusnetwork.sensorscanner.HomeFragment.DeviceList;
 
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener{
 
@@ -21,12 +21,18 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public NavigationView nv;
 
+    private DeviceList deviceFragment;
+    private TerminalFragment terminalFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(findViewById(R.id.toolbar));
+
+        deviceFragment = new DeviceList(this);
+        terminalFragment = new TerminalFragment();
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -41,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment, new DeviceList(), "devices").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, terminalFragment, "terminal").commit();
+
         else
             onBackStackChanged();
 
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
 
     }
+
 
     @Override
     public void onBackStackChanged() {
@@ -60,6 +68,17 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public void setBtAddress(String address) {
+        terminalFragment = new TerminalFragment();
+        terminalFragment.setAddress(address);
+        if (terminalFragment == null)
+            terminalFragment = new TerminalFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, terminalFragment, "terminal").commit();
+        getSupportActionBar().setTitle("Terminal");
+        drawerLayout.closeDrawers();
+        //terminalFragment.connect();
     }
 
     @Override
@@ -79,9 +98,21 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         switch(id)
         {
             case R.id.device_list:
-                Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();break;
+                if (deviceFragment == null)
+                    deviceFragment = new DeviceList(this);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment, deviceFragment, "devices").commit();
+                getSupportActionBar().setTitle("Devices");
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
+                break;
             case R.id.terminal:
-                Toast.makeText(MainActivity.this, "Settings",Toast.LENGTH_SHORT).show();break;
+                if (terminalFragment == null)
+                    terminalFragment = new TerminalFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment, terminalFragment, "Terminal").commit();
+                getSupportActionBar().setTitle("Terminal");
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
+                break;
             case R.id.data:
                 Toast.makeText(MainActivity.this, "My Cart",Toast.LENGTH_SHORT).show();break;
             default:

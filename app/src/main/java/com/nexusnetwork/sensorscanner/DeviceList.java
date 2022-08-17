@@ -1,4 +1,4 @@
-package com.nexusnetwork.sensorscanner.HomeFragment;
+package com.nexusnetwork.sensorscanner;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -34,6 +34,12 @@ public class DeviceList extends ListFragment {
     private BluetoothAdapter bluetoothAdapter;
     private final ArrayList<BluetoothDevice> listItems = new ArrayList<>();
     private ArrayAdapter<BluetoothDevice> listAdapter;
+
+    private MainActivity instance;
+
+    public DeviceList(MainActivity instance) {
+        this.instance = instance;
+    }
 
     private ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -109,6 +115,8 @@ public class DeviceList extends ListFragment {
 //            menu.findItem(R.id.bt_settings).setEnabled(false);
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -146,11 +154,11 @@ public class DeviceList extends ListFragment {
         listAdapter.notifyDataSetChanged();
     }
 
+
     @Override
     public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
         BluetoothDevice device = listItems.get(position-1);
-        Bundle args = new Bundle();
-        args.putString("device", device.getAddress());
+        instance.setBtAddress(device.getAddress());
         //ragment fragment = new TerminalFragment();
         //fragment.setArguments(args);
         //getFragmentManager().beginTransaction().replace(R.id.fragment, fragment, "terminal").addToBackStack(null).commit();
