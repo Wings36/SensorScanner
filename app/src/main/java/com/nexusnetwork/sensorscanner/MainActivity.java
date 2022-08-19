@@ -7,7 +7,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public NavigationView nv;
 
     private DeviceList deviceFragment;
-    private TerminalFragment terminalFragment;
+    private SensorFragment SensorFragment;
 
 
     @Override
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         setContentView(R.layout.activity_main);
 
         deviceFragment = new DeviceList(this);
-        terminalFragment = new TerminalFragment();
+        SensorFragment = new SensorFragment();
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -47,13 +46,15 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, terminalFragment, "terminal").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, deviceFragment, "device").commit();
 
         else
             onBackStackChanged();
 
-        nv = (NavigationView)findViewById(R.id.navview);
+        nv = findViewById(R.id.navview);
         nv.setNavigationItemSelectedListener(this);
+
+
 
 
     }
@@ -71,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     }
 
     public void setBtAddress(String address) {
-        terminalFragment = new TerminalFragment();
-        terminalFragment.setAddress(address);
-        if (terminalFragment == null)
-            terminalFragment = new TerminalFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, terminalFragment, "terminal").commit();
-        getSupportActionBar().setTitle("Terminal");
+        SensorFragment = new SensorFragment();
+        SensorFragment.setAddress(address);
+        if (SensorFragment == null)
+            SensorFragment = new SensorFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, SensorFragment, "Sensor").commit();
+        getSupportActionBar().setTitle("Sensor");
         drawerLayout.closeDrawers();
         //terminalFragment.connect();
     }
@@ -105,16 +106,14 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.terminal:
-                if (terminalFragment == null)
-                    terminalFragment = new TerminalFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment, terminalFragment, "Terminal").commit();
+            case R.id.sensorOutput:
+                if (SensorFragment == null)
+                    SensorFragment = new SensorFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment, SensorFragment, "Terminal").commit();
                 getSupportActionBar().setTitle("Terminal");
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.data:
-                Toast.makeText(MainActivity.this, "My Cart",Toast.LENGTH_SHORT).show();break;
             default:
                 return true;
         }
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

@@ -1,5 +1,6 @@
 package com.nexusnetwork.sensorscanner;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -16,7 +17,7 @@ import java.util.concurrent.Executors;
 
 class SerialSocket implements Runnable {
 
-    private static final UUID BLUETOOTH_SPP = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID btUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private final BroadcastReceiver disconnectBroadcastReceiver;
 
@@ -36,18 +37,12 @@ class SerialSocket implements Runnable {
             public void onReceive(Context context, Intent intent) {
                 if(listener != null)
                     listener.onSerialIoError(new IOException("background disconnect"));
-                disconnect(); // disconnect now, else would be queued until UI re-attached
+                disconnect();
             }
         };
     }
 
-    String getName() {
-        return device.getName() != null ? device.getName() : device.getAddress();
-    }
 
-    /**
-     * connect-success and most connect-errors are returned asynchronously to listener
-     */
     void connect(SerialListener listener) throws IOException {
         this.listener = listener;
         context.registerReceiver(disconnectBroadcastReceiver, new IntentFilter(Constants.INTENT_ACTION_DISCONNECT));
@@ -76,10 +71,11 @@ class SerialSocket implements Runnable {
         socket.getOutputStream().write(data);
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void run() { // connect & read
         try {
-            socket = device.createRfcommSocketToServiceRecord(BLUETOOTH_SPP);
+            socket = device.createRfcommSocketToServiceRecord(btUUID);
             socket.connect();
             if(listener != null)
                 listener.onSerialConnect();

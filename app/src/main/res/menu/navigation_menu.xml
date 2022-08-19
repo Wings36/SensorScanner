@@ -9,13 +9,8 @@
         android:title="Devices" />
 
     <item
-        android:id="@+id/terminal"
-        android:icon="@drawable/baseline_terminal_24"
-        android:title="Terminal" />
-
-    <item
-        android:id="@+id/data"
+        android:id="@+id/sensorOutput"
         android:icon="@drawable/baseline_sensors_24"
-        android:title="Data" />
+        android:title="Sensors" />
 
 </menu>

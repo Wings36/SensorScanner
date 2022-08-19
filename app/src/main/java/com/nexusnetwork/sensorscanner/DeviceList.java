@@ -35,13 +35,13 @@ public class DeviceList extends ListFragment {
     private final ArrayList<BluetoothDevice> listItems = new ArrayList<>();
     private ArrayAdapter<BluetoothDevice> listAdapter;
 
-    private MainActivity instance;
+    private final MainActivity instance;
 
     public DeviceList(MainActivity instance) {
         this.instance = instance;
     }
 
-    private ActivityResultLauncher<String> requestPermissionLauncher =
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     // Permission is granted. Continue the action or workflow in your
